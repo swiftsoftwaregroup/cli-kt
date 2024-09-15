@@ -2,11 +2,9 @@
 
 Template for Command Line Interface (CLI) tool in Kotlin
 
-## Development
+## Setup for macOS
 
-### Setup for macOS
-
-#### Xcode Command Line Tools
+### Xcode Command Line Tools
 
 Install Command Line Tools (CLT) for Xcode:
 
@@ -14,7 +12,7 @@ Install Command Line Tools (CLT) for Xcode:
 xcode-select --install
 ```
 
-#### Homebrew
+### Homebrew
 
 Install [Homebrew](https://brew.sh/):
 
@@ -22,7 +20,7 @@ Install [Homebrew](https://brew.sh/):
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-#### SDKMAN!
+### SDKMAN!
 
 Install:
 
@@ -49,7 +47,7 @@ sdk config
 # save the file
 ```
 
-### Work on macOS
+## Work on macOS
 
 Configure project:
 
@@ -79,13 +77,15 @@ echo "John" > name.txt
 ./gradlew run --args="greet -l bg name.txt"
 ```
 
-### Build JAR
+### Run as JAR
+
+Build JAR:
 
 ```bash
 ./gradlew shadowJar
 ```
 
-### Run JAR
+Run as JAR:
 
 ```bash
 echo "John" > name.txt
@@ -93,5 +93,46 @@ echo "John" > name.txt
 java -jar build/libs/cli-kt.jar greet name.txt
 java -jar build/libs/cli-kt.jar greet --language es name.txt
 java -jar build/libs/cli-kt.jar greet -l bg name.txt
+```
+
+### Test
+
+Run all tests:
+
+```bash
+./gradlew test
+
+ GreetCommand Tests
+
+    generateGreeting function
+
+      ✔ should generate correct greetings for different languages
+
+    GreetCommand execution
+
+      ✔ should greet in English by default
+      ✔ should handle non-existent file
+      ✔ should greet in Spanish when specified
+      ✔ should greet in Bulgarian when specified
+
+    readNameFromFile function
+
+      ✔ should read name correctly from file
+
+  6 passing (698ms)
+```
+
+Run specific test:
+
+```bash
+./gradlew test --tests "GreetCommandTest\$GenerateGreetingTests.testGenerateGreeting"
+
+GreetCommand Tests
+
+    generateGreeting function
+
+      ✔ should generate correct greetings for different languages
+
+  1 passing (558ms)
 ```
 

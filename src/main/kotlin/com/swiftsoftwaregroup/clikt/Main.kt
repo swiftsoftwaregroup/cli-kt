@@ -27,9 +27,13 @@ class GreetCommand : Subcommand("greet", "Greet a user based on a name in a file
     ).default(Language.en)
 
     override fun execute() {
-        val name = readNameFromFile(File(file))
-        val greeting = generateGreeting(name, language)
-        println(greeting)
+        try {
+            val name = readNameFromFile(File(file))
+            val greeting = generateGreeting(name, language)
+            println(greeting)
+        } catch (e: java.io.FileNotFoundException) {
+            System.err.println("Error: File not found: $file")
+        }
     }
 }
 
